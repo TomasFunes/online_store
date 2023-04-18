@@ -4,13 +4,14 @@ import services.implementations.*;
 import java.util.Scanner;
 import entities.*;
 import exceptions.*;
+import java.util.List;
 
 public class ProductCatalogMenu implements Menu {
 	
 	DefaultProductManagementService productManagement = DefaultProductManagementService.getInstance();
 	ApplicationContext context = ApplicationContext.getInstance();
 	Cart cart = context.getSessionCart();
-	Product[]products = productManagement.getProducts();
+	List<Product> products = productManagement.getProducts();
 	
 	private static String EMPTY_CART_STATEMENT = "Enter product id to add it to the cart or 'menu' to go back to the main menu";
 	private static String NON_EMPTY_CART_STATEMENT = "If you want to add a new product - enter the product id.\n"
@@ -38,7 +39,7 @@ public class ProductCatalogMenu implements Menu {
 						if(context.getLoggedInUser() == null) {
 							throw new NotLoggedInException();
 						}
-						if(cart.getProducts().length == 0) {
+						if(cart.getProducts().size() == 0) {
 							throw new EmptyCartException();
 						}
 						Menu menu = new CheckoutMenu();

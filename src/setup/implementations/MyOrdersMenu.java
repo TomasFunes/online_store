@@ -1,6 +1,7 @@
 package setup.implementations;
 
 import services.implementations.DefaultOrderManagementService;
+import java.util.List;
 import setup.ApplicationContext;
 import services.OrderManagementService;
 import entities.Order;
@@ -20,9 +21,9 @@ public class MyOrdersMenu implements Menu {
 		}
 		
 		int userId = context.getLoggedInUser().getId();
-		Order[] orders = orderManagement.getOrdersByUserId(userId);
+		List<Order> orders = orderManagement.getOrdersByUserId(userId);
 
-		if(orders.length == 0 ) {
+		if(orders.size() == 0 ) {
 			throw new NoOrdersException();
 		}
 		

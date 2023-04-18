@@ -4,9 +4,8 @@ import entities.*;
 import entities.implementations.*;
 import setup.*;
 import services.implementations.*;
-import services.*;
 import java.util.Scanner;
-import exceptions.*;
+import java.util.List;
 
 public class CheckoutMenu implements Menu {
 	
@@ -18,7 +17,7 @@ public class CheckoutMenu implements Menu {
 		printMenuHeader();
 		
 		Scanner sc = new Scanner(System.in);
-		Product[] products = context.getSessionCart().getProducts();
+		List<Product> products = context.getSessionCart().getProducts();
 		int customerId = context.getLoggedInUser().getId();
 		
 		System.out.println("Enter your credit card number without spaces and press enter to confirm purchase.");

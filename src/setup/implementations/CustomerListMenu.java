@@ -2,18 +2,18 @@ package setup.implementations;
 
 import services.implementations.DefaultUserManagementService;
 
-import java.util.Arrays;
 
 import entities.User;
 import services.UserManagementService;
 import setup.Menu;
+import java.util.List;
 
 public class CustomerListMenu implements Menu {
 	
 	UserManagementService userManagement = DefaultUserManagementService.getInstance();
 	
 	public void start() {
-		User[] users = userManagement.getUsers();
+		List<User> users = userManagement.getUsers();
 		for(User user : users) {
 			System.out.println(user.toString());
 		}

@@ -1,5 +1,7 @@
 package services.implementations;
 import services.OrderManagementService;
+import java.util.List;
+import java.util.ArrayList;
 
 import java.util.Arrays;
 
@@ -10,32 +12,28 @@ public class DefaultOrderManagementService implements OrderManagementService {
 	
 	private static DefaultOrderManagementService instance;
 	
-	Order[] orders;
-	int orderAmount;
+	List<Order> orders;
 	
 	private DefaultOrderManagementService() {
-		orderAmount = 0;
-		orders = new Order[orderAmount];
+		orders = new ArrayList<>();
 	}
 	
 	public void addOrder(Order order) {
-		orders = Arrays.copyOf(orders, ++orderAmount);
-		orders[orderAmount - 1] = order;
+		orders.add(order);
 	}
 	
-	public Order[] getOrdersByUserId(int userId) {
-		Order[] userOrders = new Order[orderAmount];
-		int i = 0;
+	public List<Order> getOrdersByUserId(int userId) {
+		List<Order> userOrders = new ArrayList<Order>();
 		for(Order order : orders) {
 			if(order.getCustomerId() == userId) {
-				userOrders[i++] = order;
+				userOrders.add(order);
 			}
 		}
-		return Arrays.copyOf(userOrders, i);
+		return userOrders;
 	}
 	
-	public Order[] getOrders() {
-		return Arrays.copyOf(orders, orderAmount);
+	public List<Order> getOrders() {
+		return List.copyOf(orders);
 	}
 	
 	public static DefaultOrderManagementService getInstance() {

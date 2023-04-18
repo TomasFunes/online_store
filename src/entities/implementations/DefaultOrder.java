@@ -1,6 +1,6 @@
 package entities.implementations;
 
-import java.util.Arrays;
+import java.util.List;
 
 import entities.*;
 import exceptions.InvalidCreditCardException;
@@ -9,14 +9,14 @@ import exceptions.InvalidCreditCardException;
 public class DefaultOrder implements Order {
 
 	private String creditCardNumber;
-	private Product[] products;
+	private List<Product> products;
 	private int customerId;
 	
 	public DefaultOrder() {
 		
 	}
 	
-	public DefaultOrder(String creditCardNumber, Product[] products, int customerId) {
+	public DefaultOrder(String creditCardNumber, List<Product> products, int customerId) {
 		this.creditCardNumber = creditCardNumber;
 		this.products = products;
 		this.customerId = customerId;
@@ -52,13 +52,13 @@ public class DefaultOrder implements Order {
 	}
 
 
-	public void setProducts(Product[] products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 
 	@Override
 	public String toString() {
-		return "[creditCardNumber=" + creditCardNumber + ", products=" + Arrays.toString(products)
+		return "[creditCardNumber=" + creditCardNumber + ", products=" + products.toString()
 				+ ", customerId=" + customerId + "]";
 	}
 	

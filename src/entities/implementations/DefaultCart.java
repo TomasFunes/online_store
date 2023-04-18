@@ -1,36 +1,34 @@
 package entities.implementations;
-import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 
 import entities.*;
 
 public class DefaultCart implements Cart{
 	
-	private Product[] products;
-	private int size = 0;
+	private List<Product> products;
 	
 	public DefaultCart(){
-		products = new Product[size];
+		products = new ArrayList<>();
 	}
 	
 	@Override
 	public boolean isEmpty() {
-		return products.length == 0;
+		return products.size() == 0;
 	}
 	
 	@Override
 	public void addProduct(Product productById) {
-		products = Arrays.copyOf(products, ++size);
-		products[size - 1] = productById;
+		products.add(productById);
 	}
 	
 	@Override
-	public Product[] getProducts() {
-		return Arrays.copyOf(products, size);
+	public List<Product> getProducts() {
+		return List.copyOf(products);
 	}
 	
 	@Override
 	public void clear() {
-		size = 0;
-		products = new Product[size];
+		products = new ArrayList<>();
 	}
 }

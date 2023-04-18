@@ -1,16 +1,16 @@
 package services.implementations;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import services.*;
 import setup.ApplicationContext;
 import entities.*;
+import java.util.List;
 
 public class DefaultUserManagementService implements UserManagementService {
 
-	private User[] users;
-	private int size = 0;
+	private List<User> users;
 	private static DefaultUserManagementService instance;
 	private ApplicationContext context = ApplicationContext.getInstance();
 	private static final String NOT_VALID_EMAIL = "You have to input email to register. Please, try one more time";
@@ -18,7 +18,7 @@ public class DefaultUserManagementService implements UserManagementService {
 	private static final String SUCCESSFUL_VALIDATION = "New user is created";
 	
 	private DefaultUserManagementService() {
-		users = new User[0];
+		users = new ArrayList<>();
 	}
 	
 	public static DefaultUserManagementService getInstance() {
@@ -38,8 +38,7 @@ public class DefaultUserManagementService implements UserManagementService {
 			notification = NOT_UNIQUE_EMAIL;
 		}
 		else{
-			users = Arrays.copyOf(users, ++size);
-			users[size - 1] = user;
+			users.add(user);
 			context.setLoggedInUser(user);
 			notification = SUCCESSFUL_VALIDATION;
 		}
@@ -58,8 +57,8 @@ public class DefaultUserManagementService implements UserManagementService {
 		return validCredentials;
 	}
 	
-	public User[] getUsers() {
-		return Arrays.copyOf(users, size);
+	public List<User> getUsers() {
+		return List.copyOf(users);
 	}
 	
 	public User getUserByEmail(String userEmail) {
